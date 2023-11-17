@@ -21,3 +21,24 @@
    padding: 5px;
     color: #ffff;
 }
+.list{
+    list-style: none;
+    width: 100%;
+    padding: 0;
+}
+.itens{
+    background: #262626;
+    width: 100%;
+    min-height: 60px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.itens label{
+    flex-basis: 85%;
+}
+.itens button{
+    background: none;
+}
