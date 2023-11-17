@@ -1,0 +1,23 @@
+.tarefas{
+    width: 68%;
+    margin-top: 35px;
+
+}
+.info{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.info_total{
+    color: #4EA8DE;
+    min-width: 150px;
+}
+.info_executadas{
+    color:#8284FA;
+}
+.rounded{
+    border-radius: 25%;
+    background: #1a1a1a;
+   padding: 5px;
+    color: #ffff;
+}
