@@ -1,35 +1,43 @@
 import styles from "./Tarefas.module.css"
 import {Trash} from "@phosphor-icons/react";
+import {tarefaProps} from "./Main.tsx";
 
-export const Tarefas = ()=>{
+interface TarefasProps {
+    tarefas: tarefaProps[];
+    mudaStatusTarefa: (id: string) => void;
+    deletaTarefa: (id:string) => void;
+}
+
+export const Tarefas: React.FC<TarefasProps> = ({ tarefas, mudaStatusTarefa, deletaTarefa }) => {
+    const totalConcluidas =  tarefas.filter((tarefa)=>tarefa.completa).length
+
     return(
         <div className={styles.tarefas}>
             <div className={styles.info}>
                 <span className={styles.info_total}>
-                    Tarefas criadas <em className={styles.rounded}>5</em>
+                    Tarefas criadas <em className={styles.rounded}>{tarefas.length}</em>
                 </span>
                 <span className={styles.info_executadas}>
-                    Concluídas <em className={styles.rounded}>2 de 5</em>
+                    Concluídas <em className={styles.rounded}>{totalConcluidas} de {tarefas.length}</em>
                 </span>
             </div>
-
             <ul className={styles.list}>
-                <li className={styles.itens}>
-                    <input type="checkbox" name='completed' id='completed'/>
-                        <label htmlFor='completed'>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to </label>
-                <button><Trash/></button>
-                </li>
-                <li className={styles.itens}>
-                    <input type="checkbox" name='completed' id='completed'/>
-                    <label htmlFor='completed'>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to </label>
-                    <button><Trash/></button>
-                </li>
-
-                <li className={styles.itens}>
-                    <input type="checkbox" name='completed' id='completed'/>
-                    <label htmlFor='completed'>Lorem Ipsum han unknown printer took a galley of type and scrambled it to </label>
-                    <button><Trash/></button>
-                </li>
+                {tarefas.map((tarefa:tarefaProps) => (
+                    <li key={tarefa.id} className={styles.itens}>
+                            <input
+                                type="checkbox"
+                                name="completed"
+                                id={`completed-${tarefa.id}`}
+                                onChange={()=>mudaStatusTarefa(tarefa.id)}
+                            />
+                        <label htmlFor={`completed-${tarefa.id}`}
+                               className={tarefa.completa ? styles.completed : ""}
+                        >{tarefa.titulo}</label>
+                        <button onClick={()=> deletaTarefa(tarefa.id)}>
+                            <Trash />
+                        </button>
+                    </li>
+                ))}
             </ul>
         </div>
     )

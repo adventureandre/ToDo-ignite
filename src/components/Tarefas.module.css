@@ -42,3 +42,7 @@
 .itens button{
     background: none;
 }
+
+.completed {
+    text-decoration: line-through !important;
+}
